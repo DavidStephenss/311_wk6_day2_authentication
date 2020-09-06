@@ -1,5 +1,7 @@
 const axios = require('axios')
 const mysql = require('mysql')
+const dotenv = require('dotenv')
+dotenv.config()
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const pool = require('../sql/connection')
@@ -28,7 +30,7 @@ const saltRounds = 10
 const login = (req, res) => {
   const { username, password } = req.body
 
-  axios(`https://${process.env.AUTH0_DOMAIN}/oauth/token`, {
+  axios(`https://${process.env.AUTH0_DOMAIN}/auth/token`, {
     method: 'POST',
     headers: {
       'content-type': 'application/json'
@@ -39,7 +41,6 @@ const login = (req, res) => {
       password: password,
       audience: process.env.AUTH0_IDENTITY,
       connection: 'Username-Password-Authentication',
-      scope: 'openid',
       client_id: process.env.AUTH0_CLIENT_ID,
       client_secret: process.env.AUTH0_CLIENT_SECRET
     }
