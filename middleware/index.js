@@ -1,5 +1,7 @@
 const jwksRsa = require('jwks-rsa');
 const jwt = require('express-jwt');
+const dotenv = require('dotenv')
+dotenv.config()
 
 const logger = () => {}
 
